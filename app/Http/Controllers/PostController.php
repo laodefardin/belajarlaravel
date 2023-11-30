@@ -18,8 +18,8 @@ class PostController extends Controller
         // $posts = DB::table("posts")->get();
         // select judul, konten from posts;‹‹›
         $posts = DB::table("posts")
-                    ->select('id','judul', 'konten','created_at')
-                    ->get();
+            ->select('id', 'judul', 'konten', 'created_at')
+            ->get();
         $view_data = [
             'posts' => $posts,
         ];
@@ -50,12 +50,12 @@ class PostController extends Controller
         $konten = $request->input('konten');
 
         DB::table('posts')->insert([
-            'judul'=> $judul,
-            'konten'=> $konten,
+            'judul' => $judul,
+            'konten' => $konten,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
-        
+
         // $posts = Storage::get('posts.txt');
         // $posts = explode("\n", $posts);
 
@@ -90,10 +90,10 @@ class PostController extends Controller
 
         // "SELECT ... from posts where id = $id"
         $post = DB::table('posts')
-            ->select('id', 'judul', 'konten','created_at')
+            ->select('id', 'judul', 'konten', 'created_at')
             ->where('id', '=', $id)
             ->first();
-            
+
         $view_data = [
             "post" => $post,
         ];
@@ -105,7 +105,15 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = DB::table('posts')
+            ->select('id', 'judul', 'konten', 'created_at')
+            ->where('id', '=', $id)
+            ->first();
+
+        $view_data = [
+            "post" => $post,
+        ];
+        return view('posts.edit', $view_data);
     }
 
     /**

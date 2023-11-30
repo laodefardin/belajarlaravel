@@ -36,7 +36,9 @@
                     <h5 class="card-title">{{ $post->judul}} <small>#{{ $number }}</small></h5>
                     <p class="card-text">{{ $post->konten }}</p>
                     <p class="card-text"><small class="text-body-secondary">Last updated {{ date('d M Y H:i', strtotime($post->created_at)) }}</small></p>
-                    <a href="{{ url("posts/{$post->id}") }}" class="btn btn-primary btn-sm">Selengkapnya</a>
+                    <a href="{{ url("posts/$post->id") }}" class="btn btn-primary btn-sm">Selengkapnya</a>
+                    <a href="{{ url("posts/$post->id/edit") }}" class="btn btn-warning btn-sm">Edit</a>
+
                 </div>
             </div>
             @php($number++)
