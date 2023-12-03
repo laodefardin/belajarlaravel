@@ -16,7 +16,7 @@
 <body>
     <h1>Ubah Postingan</h1>
 
-    <form action="{{ url("posts{$post->id }") }}" method="post" class="form-control">
+    <form action="{{ url("posts/$post->id") }}" method="post" class="form-control">
         @method('PATCH')
         @csrf
         <div class="mb-3">
@@ -28,6 +28,12 @@
             <textarea class="form-control" id="konten" name="konten" rows="3">{{ $post->konten }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-sm">Tambahkan</button>
+    </form>
+
+    <form action="{{ url("posts/$post->id") }}" method="post">
+        @method('DELETE')
+        @csrf
+        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
     </form>
 </body>
 

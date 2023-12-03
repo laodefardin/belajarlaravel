@@ -19,6 +19,7 @@ class PostController extends Controller
         // select judul, konten from posts;‹‹›
         $posts = DB::table("posts")
             ->select('id', 'judul', 'konten', 'created_at')
+            ->where('active', true)
             ->get();
         $view_data = [
             'posts' => $posts,
@@ -121,7 +122,18 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $judul = $request->input('judul');
+        $konten = $request->input('konten');
+
+        // "UPDATE ... WHERE id = $id"
+        DB::table('posts')
+            ->WHERE('id', $id)
+            ->UPDATE([
+                'judul' => $judul,
+                'konten' => $konten,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+            return redirect("posts/{$id}");
     }
 
     /**
@@ -129,6 +141,9 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('posts')
+        ->WHERE('id', $id)
+        ->DELETE();
+        return redirect('posts');
     }
 }
